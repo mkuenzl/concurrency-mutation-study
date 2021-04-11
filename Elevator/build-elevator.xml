@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="compile">
+
+  <property name="debuglevel" value="source,lines,vars"/>
+  <property name="target" value="1.6"/>
+  <property name="source" value="1.6"/>
+  <property name="class.dir" value="classes"/>
+
+  <property name="java.agent.dir" value="${basedir}/../../java-agents"/>
+  <property name="jmt.agent.jar" value="${java.agent.dir}/jmt-agent.jar"/>
+  <property name="jmt.server.jar" value="${java.agent.dir}/jmt-server.jar"/>
+  <property name="jvmti.monitorevent.agent" value="${java.agent.dir}/jvmti-monitorevent-tracing-agent.dll"/>
+  <property name="jvmti.stacksampling.agent" value="${java.agent.dir}/jvmti-stack-sampling-agent.dll"/>
+  <property name="jvmti.project" value="parallel-programs"/>
+
+  <property name="data.file" value="${basedir}/data"/>
+
+  <target name="clean">
+    <delete dir="classes"/>
+  </target>
+
+  <target name="compile">
+    <mkdir dir="classes"/>
+    <javac debug="true" debuglevel="${debuglevel}"
+           srcdir="src" destdir="classes" includeAntRuntime="false"
+    />
+  </target>
+
+  <target name="spawn-server">
+    <java jar="../../java-agents/jmt-server.jar" fork="true" spawn="true">
+      <arg value="C:\Users\Kuenzl\.monitor-event-tracing\parallel-programs\${bug.name}-monitorevent.xml"/>
+    </java>
+  </target>
+
+  <target name="run" depends="compile">
+    <java classname="elevator.Elevator" fork="true" dir="/" classpath="${class.dir};lib/*">
+      <arg description="data file" value="${data.file}"/>
+    </java>
+  </target>
+
+</project>

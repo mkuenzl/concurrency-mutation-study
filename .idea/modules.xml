@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Elevator/Elevator.iml" filepath="$PROJECT_DIR$/Elevator/Elevator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ReaderWriter/ReaderWriter.iml" filepath="$PROJECT_DIR$/ReaderWriter/ReaderWriter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WorkerManager/WorkerManager.iml" filepath="$PROJECT_DIR$/WorkerManager/WorkerManager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kuenzl-concurrency-mutation-study.iml" filepath="$PROJECT_DIR$/kuenzl-concurrency-mutation-study.iml" />
+    </modules>
+  </component>
+</project>

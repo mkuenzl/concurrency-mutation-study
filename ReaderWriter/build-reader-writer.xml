@@ -1,0 +1,56 @@
+<project name="" default="clean" basedir="" xmlns:ivy="antlib:org.apache.ivy.ant">
+
+    <property name="out.dir" value="out"/>
+
+    <property name="src.dir" value="src"/>
+    <property name="class.dir" value="classes"/>
+    <property name="modified.class.dir" value="modified-classes"/>
+
+    <property name="java.agent.dir" value="${basedir}/../../java-agents"/>
+    <property name="jmt.agent.jar" value="${java.agent.dir}/jmt-agent.jar"/>
+    <property name="jmt.server.jar" value="${java.agent.dir}/jmt-server.jar"/>
+    <property name="jvmti.monitorevent.agent" value="${java.agent.dir}/jvmti-monitorevent-tracing-agent.dll"/>
+    <property name="jvmti.stacksampling.agent" value="${java.agent.dir}/jvmti-stack-sampling-agent.dll"/>
+    <property name="jvmti.project" value="mutation-study"/>
+
+    <target name="clean">
+        <delete dir="${modified.class.dir}"/>
+        <!--<delete dir="${libPath}"/>-->
+        <delete dir="${out.dir}"/>
+    </target>
+
+    <target name="spawn-server">
+        <java jar="../../java-agents/jmt-server.jar" fork="true" spawn="true">
+            <arg value="C:\Users\Kuenzl\.monitor-event-tracing\parallel-programs\${bug.name}-monitorevent.xml"/>
+        </java>
+    </target>
+
+    <target name="compile" depends="clean">
+        <mkdir dir="${class.dir}"/>
+        <javac srcdir="${src.dir}"
+               destdir="${class.dir}"
+               includeantruntime="false"
+               debug="true"
+               debuglevel="lines,vars,source">
+        </javac>
+    </target>
+
+    <target name="run-stacksampling" depends="compile">
+        <java classname="RaceConditionBugMain" fork="true" dir="/" classpath="${class.dir}">
+            <jvmarg value="-agentpath:${jvmti.stacksampling.agent}=project=${jvmti.project};sampleFile=reader-writer-stacksampling.xml"/>
+        </java>
+    </target>
+
+    <target name="run-monitorevent" depends="compile">
+        <antcall target="spawn-server">
+            <param name="bug.name" value="reader-writer"/>
+        </antcall>
+        <java classname="RaceConditionBugMain" fork="true" dir="/" classpath="${class.dir}">
+            <jvmarg value="-agentlib:jdwp=transport=dt_socket,address=localhost:4711"/>
+            <jvmarg value="-javaagent:${jmt.agent.jar}=debug=true;bci=true"/>
+            <jvmarg value="-Xbootclasspath/a:${jmt.agent.jar}"/>
+            <jvmarg value="-agentpath:${jvmti.monitorevent.agent}"/>
+        </java>
+    </target>
+
+</project>
