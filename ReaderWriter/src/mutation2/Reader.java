@@ -25,7 +25,9 @@ public class Reader extends Thread
         {
             try
             {
-                synchronized (raceConditionBug)
+                //mutation
+                synchronized (RaceConditionBug.class)
+                //synchronized (raceConditionBug)
                 {
                     while (raceConditionBug.getCounter() < RaceConditionBug.END_VALUE)
                     {

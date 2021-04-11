@@ -46,7 +46,9 @@ class RaceConditionBug
             counterVariable = tmp;
             if (counterVariable == END_VALUE)
             {
-                notifyAll();
+                //mutation notifyAll -> notify
+                //notifyAll();
+                notify();
             }
         }
     }

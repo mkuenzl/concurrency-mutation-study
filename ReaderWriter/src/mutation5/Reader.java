@@ -25,14 +25,15 @@ public class Reader extends Thread
         {
             try
             {
-                synchronized (raceConditionBug)
-                {
+                //mutation
+                //synchronized (raceConditionBug)
+                //{
                     while (raceConditionBug.getCounter() < RaceConditionBug.END_VALUE)
                     {
                         raceConditionBug.wait();
                     }
                     break;
-                }
+                //}
             } catch (InterruptedException ignored) { this.interrupt(); }
         }
 

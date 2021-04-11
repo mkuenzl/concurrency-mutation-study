@@ -37,10 +37,11 @@ class RaceConditionBug
         }
     }
 
-    void increaseCounter()
+    //mutation
+    synchronized void increaseCounter()
     {
-        synchronized (this)
-        {
+        //synchronized (this)
+        //{
             int tmp = counterVariable;
             tmp = tmp + 1;
             counterVariable = tmp;
@@ -48,7 +49,7 @@ class RaceConditionBug
             {
                 notifyAll();
             }
-        }
+        //}
     }
 
     private int readersTerminated = 0;

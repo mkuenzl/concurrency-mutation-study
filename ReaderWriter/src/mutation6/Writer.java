@@ -17,7 +17,12 @@ public class Writer extends Thread
         raceConditionBug.latch.countDown();
         for (int i = 0; i < RaceConditionBug.END_VALUE; i++)
         {
-            raceConditionBug.increaseCounter();
+            //mutation added synchronized block around increaseCounter
+            synchronized (raceConditionBug)
+            {
+                raceConditionBug.increaseCounter();
+            }
+            //raceConditionBug.increaseCounter();
             long start = System.nanoTime(), j = 0;
             while (System.nanoTime() - start < 1e3)
             { // Simulation of some computational runtime

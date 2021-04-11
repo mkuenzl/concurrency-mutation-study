@@ -29,12 +29,13 @@ class RaceConditionBug
         }
     }
 
-    int getCounter()
+    //mutation
+    synchronized int getCounter()
     {
-        synchronized (this)
-        {
+        //synchronized (this)
+        //{
             return counterVariable;
-        }
+        //}
     }
 
     void increaseCounter()
