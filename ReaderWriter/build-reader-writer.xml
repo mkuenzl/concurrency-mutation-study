@@ -35,6 +35,42 @@
         </javac>
     </target>
 
+    <target name="run-mutation1-stacksampling" depends="compile">
+        <java classname="mutation1.RaceConditionBugMain" fork="true" dir="/" classpath="${class.dir}">
+            <jvmarg value="-agentpath:${jvmti.stacksampling.agent}=project=${jvmti.project};sampleFile=reader-writer-mutation1-stacksampling.xml"/>
+        </java>
+    </target>
+
+    <target name="run-mutation2-stacksampling" depends="compile">
+        <java classname="mutation2.RaceConditionBugMain" fork="true" dir="/" classpath="${class.dir}">
+            <jvmarg value="-agentpath:${jvmti.stacksampling.agent}=project=${jvmti.project};sampleFile=reader-writer-mutation2-stacksampling.xml"/>
+        </java>
+    </target>
+
+    <target name="run-mutation3-stacksampling" depends="compile">
+        <java classname="mutation3.RaceConditionBugMain" fork="true" dir="/" classpath="${class.dir}">
+            <jvmarg value="-agentpath:${jvmti.stacksampling.agent}=project=${jvmti.project};sampleFile=reader-writer-mutation3-stacksampling.xml"/>
+        </java>
+    </target>
+
+    <target name="run-mutation4-stacksampling" depends="compile">
+        <java classname="mutation4.RaceConditionBugMain" fork="true" dir="/" classpath="${class.dir}">
+            <jvmarg value="-agentpath:${jvmti.stacksampling.agent}=project=${jvmti.project};sampleFile=reader-writer-mutation4-stacksampling.xml"/>
+        </java>
+    </target>
+
+    <target name="run-mutation5-stacksampling" depends="compile">
+        <java classname="mutation5.RaceConditionBugMain" fork="true" dir="/" classpath="${class.dir}">
+            <jvmarg value="-agentpath:${jvmti.stacksampling.agent}=project=${jvmti.project};sampleFile=reader-writer-mutation5-stacksampling.xml"/>
+        </java>
+    </target>
+
+    <target name="run-mutation6-stacksampling" depends="compile">
+        <java classname="mutation6.RaceConditionBugMain" fork="true" dir="/" classpath="${class.dir}">
+            <jvmarg value="-agentpath:${jvmti.stacksampling.agent}=project=${jvmti.project};sampleFile=reader-writer-mutation6-stacksampling.xml"/>
+        </java>
+    </target>
+
     <target name="run-stacksampling" depends="compile">
         <java classname="RaceConditionBugMain" fork="true" dir="/" classpath="${class.dir}">
             <jvmarg value="-agentpath:${jvmti.stacksampling.agent}=project=${jvmti.project};sampleFile=reader-writer-stacksampling.xml"/>

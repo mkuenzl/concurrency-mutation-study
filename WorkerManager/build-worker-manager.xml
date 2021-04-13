@@ -66,14 +66,14 @@
     </target>
 
     <target name="run-mutation6-stacksampling" depends="compile">
-        <java classname="mutation5.WorkerManagerMain" fork="true" dir="/" classpath="${class.dir}">
+        <java classname="mutation6.WorkerManagerMain" fork="true" dir="/" classpath="${class.dir}">
             <jvmarg value="-agentpath:${jvmti.stacksampling.agent}=project=${jvmti.project};sampleFile=worker-manager-mutation6-stacksampling.xml"/>
         </java>
     </target>
 
     <target name="run-stacksampling" depends="compile">
         <java classname="WorkerManagerMain" fork="true" dir="/" classpath="${class.dir}">
-            <jvmarg value="-agentpath:${jvmti.stacksampling.agent}=project=${jvmti.project};sampleFile=worker-manager-mutation1-stacksampling.xml"/>
+            <jvmarg value="-agentpath:${jvmti.stacksampling.agent}=project=${jvmti.project};sampleFile=worker-manager-stacksampling.xml"/>
         </java>
     </target>
 
