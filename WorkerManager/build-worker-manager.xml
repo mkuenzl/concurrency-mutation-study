@@ -6,7 +6,7 @@
     <property name="class.dir" value="classes"/>
     <property name="modified.class.dir" value="modified-classes"/>
 
-    <property name="java.agent.dir" value="${basedir}/../../java-agents"/>
+    <property name="java.agent.dir" value="${basedir}/../java-agents"/>
     <property name="jmt.agent.jar" value="${java.agent.dir}/jmt-agent.jar"/>
     <property name="jmt.server.jar" value="${java.agent.dir}/jmt-server.jar"/>
     <property name="jvmti.monitorevent.agent" value="${java.agent.dir}/jvmti-monitorevent-tracing-agent.dll"/>
@@ -17,6 +17,7 @@
         <delete dir="${modified.class.dir}"/>
         <!--<delete dir="${libPath}"/>-->
         <delete dir="${out.dir}"/>
+        <delete dir="${class.dir}"/>
     </target>
 
     <target name="spawn-server">
